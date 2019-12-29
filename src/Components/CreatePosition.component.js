@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 
 class CreatePosition extends Component{
 	constructor(props)
@@ -69,6 +70,18 @@ class CreatePosition extends Component{
     	console.log(`Position Type: ${this.state.position_type}`);
 		console.log(`Position Amount: ${this.state.position_amount}`);
 		console.log(`Position Price: ${this.state.position_price}`);
+
+        const newPosition = {
+            position_security : this.state.position_security,
+            position_portfolio : this.state.position_portfolio,
+            position_custodian : this.state.position_custodian,
+            position_type : this.state.position_type,
+            position_amount : this.state.position_amount,
+            position_price : this.state.position_price
+        };
+
+        axios.post('http://localhost:4000/positions/add', newPosition)
+            .then(res => console.log(res.data));
 
 		this.setState( {
 			position_security : '',
